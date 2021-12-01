@@ -1,8 +1,16 @@
 /** @format */
 
+import { useState } from 'react';
 import emojis from './emojis';
 
 function App() {
+  const [emojiMeaning, setEmojiMeaning] = useState('');
+
+  const handleClick = (emoji) => {
+    let meaning = emojis[emoji];
+    setEmojiMeaning(meaning);
+  };
+
   return (
     <div className="bg-purple-600 min-h-screen">
       <h1 className="text-white font-bold text-4xl text-center italic font-serif underline">
@@ -11,8 +19,13 @@ function App() {
 
       <div className="flex min-h-screen flex-col mt-28">
         <p className="text-center mb-2">
-          {Object.keys(emojis).map((i) => (
-            <span className="mr-4 text-4xl cursor-default">{i}</span>
+          {Object.keys(emojis).map((emojis) => (
+            <span
+              onClick={() => handleClick(emojis)}
+              className="mr-4 text-4xl cursor-default cursor-pointer"
+            >
+              {emojis}
+            </span>
           ))}
         </p>
         <form className="flex mr-auto ml-auto">
@@ -21,6 +34,13 @@ function App() {
             placeholder="Enter emoji"
           />
         </form>
+        <span className="text-white font-bold text-center font-serif mt-7">
+          Either type the emoji or click one of the given emoji to view what it
+          is
+        </span>
+        <span className="text-white font-bold text-center font-serif mt-7">
+          Result:- {emojiMeaning}
+        </span>
       </div>
     </div>
   );
