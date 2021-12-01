@@ -11,6 +11,19 @@ function App() {
     setEmojiMeaning(meaning);
   };
 
+  const handleChange = (event) => {
+    const insertedEmoji = event.target.value;
+
+    const meaning = emojis[insertedEmoji];
+    console.log(meaning);
+
+    if (meaning === undefined) {
+      setEmojiMeaning('We do not have this emoji in our database');
+    } else {
+      setEmojiMeaning(meaning);
+    }
+  };
+
   return (
     <div className="bg-purple-600 min-h-screen">
       <h1 className="text-white font-bold text-4xl text-center italic font-serif underline">
@@ -32,6 +45,7 @@ function App() {
           <input
             className="rounded-lg p-4 w-96 text-gray-800 outline-none"
             placeholder="Enter emoji"
+            onChange={handleChange}
           />
         </form>
         <span className="text-white font-bold text-center font-serif mt-7">
